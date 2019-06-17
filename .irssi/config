@@ -18,7 +18,7 @@ servers = (
     address = "chat.freenode.net";
     chatnet = "Freenode";
     port = "6667";
-    password = "passwd";
+    password = "writepasswd";
     use_tls = "yes";
     tls_verify = "yes";
     autoconnect = "yes";
@@ -28,7 +28,7 @@ servers = (
 chatnets = {
   Freenode = {
     type = "IRC";
-    autosendcmd = "/msg nickserv identify nickname passwd;wait -freenode 5000";
+    autosendcmd = "/msg nickserv identify writename writepasswd;wait -freenode 5000";
     max_kicks = "1";
     max_msgs = "4";
     max_whois = "1";
@@ -43,23 +43,20 @@ chatnets = {
 };
 
 channels = (
-  { name = "#freenode"; chatnet = "Freenode"; autojoin = "No"; },
-  { name = "#irssi"; chatnet = "IRCNet"; autojoin = "No"; },
-  { name = "#go-nuts"; chatnet = "freenode"; },
   { name = "#python"; chatnet = "freenode"; },
   { name = "#ai"; chatnet = "freenode"; },
-  { name = "#bokuno"; chatnet = "freenode"; },
   { name = "#sql"; chatnet = "freenode"; },
   { name = "#docker"; chatnet = "freenode"; },
   { name = "#kubernetes"; chatnet = "freenode"; },
   { name = "#programming"; chatnet = "freenode"; },
-  { name = "#sql"; chatnet = "Freenode"; autojoin = "yes"; },
-  { name = "#linux"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#sql"; chatnet = "Freenode"; autojoin = "no"; },
+  { name = "#linux"; chatnet = "freenode"; autojoin = "no"; },
   { name = "#docker"; chatnet = "Freenode"; autojoin = "yes"; },
   { name = "#go-nuts"; chatnet = "Freenode"; autojoin = "yes"; },
   { name = "##algorithms"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#ubuntu-cn"; chatnet = "freenode"; },
-  { name = "##kaiwa"; chatnet = "freenode"; }
+  { name = "##kaiwa"; chatnet = "freenode"; },
+  { name = "##AGI"; chatnet = "freenode"; }
 );
 
 aliases = {
@@ -70,16 +67,12 @@ aliases = {
   BANS = "BAN";
   BYE = "QUIT";
   C = "CLEAR";
-  CALC = "EXEC - if command -v bc >/dev/null 2>&1\\; then printf '%s=' '$*'\\; echo '$*' | bc -l\\; else echo bc was not found\\; fi";
+  CAL = "EXEC - if command -v bc >/dev/null 2>&1\\; then printf '%s=' '$*'\\; echo '$*' | bc -l\\; else echo bc was not found\\; fi";
   CHAT = "DCC CHAT";
-  DATE = "TIME";
-  DEHIGHLIGHT = "DEHILIGHT";
-  DESCRIBE = "ACTION";
-  DHL = "DEHILIGHT";
   EXEMPTLIST = "MODE $C +e";
-  EXIT = "QUIT";
-  GOTO = "SCROLLBACK GOTO";
-  HIGHLIGHT = "HILIGHT";
+  GT = "SCROLLBACK GOTO";
+  H = "SCROLLBACK GOTO -50";
+  L = "SCROLLBACK GOTO +50";
   HL = "HILIGHT";
   HOST = "USERHOST";
   INVITELIST = "MODE $C +I";
@@ -89,9 +82,6 @@ aliases = {
   KN = "KNOCKOUT";
   LAST = "LASTLOG";
   LEAVE = "PART";
-  M = "MSG";
-  MUB = "UNBAN *";
-  N = "NAMES";
   NMSG = "^MSG";
   P = "PART";
   Q = "QUERY";
@@ -101,14 +91,13 @@ aliases = {
   SB = "SCROLLBACK";
   SBAR = "STATUSBAR";
   SIGNOFF = "QUIT";
-  SV = "MSG * Irssi $J ($V) - https://irssi.org";
   T = "TOPIC";
   UB = "UNBAN";
   UMODE = "MODE $N";
   UNSET = "SET -clear";
-  W = "WHO";
+  W = "WINDOW GOTO";
+  WR = "WINDOW RIGHT";
   WC = "WINDOW CLOSE";
-  WG = "WINDOW GOTO";
   WJOIN = "JOIN -window";
   WI = "WHOIS";
   WII = "WHOIS $0 $0";
@@ -128,7 +117,6 @@ statusbar = {
     topicbarstart = "{topicsbstart}";
     topicbarend = "{topicsbend}";
 
-    time = "{sb $Z}";
     user = "{sb {sbnickmode $cumode}$N{sbmode $usermode}{sbaway $A}}";
 
     window = "{sb $winref:$tag/$itemname{sbmode $M}}";
@@ -138,7 +126,7 @@ statusbar = {
     prompt_empty = "{prompt $winname}";
 
     topic = " $topic";
-    topic_empty = " Irssi v$J - https://irssi.org";
+    topic_empty = "empty";
 
     lag = "{sb Lag: $0-}";
     act = "{sb Act: $0-}";
@@ -151,13 +139,12 @@ statusbar = {
 
       disabled = "no";
       type = "window";
-      placement = "bottom";
+      placement = "top";
       position = "1";
       visible = "active";
 
       items = {
         barstart = { priority = "100"; };
-        time = { };
         user = { };
         window = { };
         window_empty = { };
@@ -171,7 +158,7 @@ statusbar = {
     window_inact = {
 
       type = "window";
-      placement = "bottom";
+      placement = "top";
       position = "1";
       visible = "inactive";
 
@@ -203,7 +190,7 @@ statusbar = {
       type = "root";
       placement = "top";
       position = "1";
-      visible = "always";
+      visible = "inactive";
 
       items = {
         topicbarstart = { priority = "100"; };
@@ -211,14 +198,15 @@ statusbar = {
         topic_empty = { };
         topicbarend = { priority = "100"; alignment = "right"; };
       };
+      disabled = "yes";
     };
   };
 };
 settings = {
   core = {
-    real_name = "nickname";
-    user_name = "nickname";
-    nick = "nickname";
+    real_name = "writename";
+    user_name = "writename";
+    nick = "writename";
   };
   "fe-text" = { actlist_sort = "refnum"; scroll = "yes"; };
   "fe-common/core" = {
@@ -227,27 +215,46 @@ settings = {
     use_msgs_window = "yes";
     reuse_unused_windows = "yes";
     autolog = "yes";
-    autolog_path = "/Volumes/beikacyou/irc/$0%m%dinfo";
+    autolog_path = "/Volumes/beikacyou/irc/$0info";
   };
 };
 ignores = ( { level = "JOINS PARTS QUITS"; } );
 hilights = (
-  { text = "nickname"; color = "%R"; nick = "no"; word = "no"; },
   {
-    text = "select";
+    text = "\\writename*";
     color = "%R";
     nick = "no";
     word = "no";
-    channels = ( "#sql" );
+    regexp = "yes";
   },
-  { text = "nickname"; color = "%R"; nick = "no"; word = "no"; },
-  { text = "thanks"; nick = "yes"; word = "yes"; },
-  {
-    text = "make";
+  { 
+    text = "func*";
     color = "%R";
-    nick = "yes";
-    word = "yes";
+    nick = "no";
+    word = "no";
+    regexp = "yes";
+  },
+  {
+    text = "\\bfunc*";
+    color = "%R";
+    nick = "no";
+    word = "no";
+    regexp = "yes";
+  },
+  {
+    text = "\\bmake\\b";
+    color = "%R";
+    nick = "no";
+    word = "no";
+    regexp = "yes";
     channels = ( "#go-nuts" );
+  },
+  {
+    text = "ai";
+    color = "%R";
+    nick = "no";
+    word = "yes";
+    channels = ( "#ai" );
   }
 );
 logs = { };
