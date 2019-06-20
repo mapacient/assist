@@ -111,7 +111,7 @@ abstracts = {
   channelhilight = "%Y$*%n";
 
   # ban/ban exception/invite list mask is printed
-  ban = "%Y$*%n";
+  ban = "%R$*%n";
 
   ##
   ## messages
@@ -182,7 +182,7 @@ abstracts = {
   ownaction = "{action $*}";
 
   # own action with target, both private/public
-  ownaction_target = "{action_core $0}%K:%c$1%n ";
+  ownaction_target = "{action_core $0}%K:%Y$1%n ";
 
   # private action sent by others
   pvtaction = "%_ (*) $*%n ";
@@ -217,7 +217,7 @@ abstracts = {
 
   # netsplits
   netsplit = "%R$*%n";
-  netjoin = "%C$*%n";
+  netjoin = "%Y$*%n";
 
   # /names list
   names_prefix = "";
@@ -237,7 +237,7 @@ abstracts = {
   dccownnick = "%R$*%n";
   dccownquerynick = "%_$*%n";
   dccownaction = "{action $*}";
-  dccownaction_target = "{action_core $0}%K:%c$1%n ";
+  dccownaction_target = "{action_core $0}%K:%Y$1%n ";
 
   # DCC chat, others
   dccmsg = "[%G$1-%K(%g$0%K)%n] ";
@@ -250,8 +250,8 @@ abstracts = {
 
   # default background for all statusbars. You can also give
   # the default foreground color for statusbar items.
-  sb_background = "%4%w";
-  window_border = "%4%w";
+  sb_background = "%Y";
+  window_border = "%Y";
 
   # default backround for "default" statusbar group
   #sb_default_bg = "%4";
@@ -274,8 +274,8 @@ abstracts = {
 
   prompt = "[$*] ";
 
-  sb = " %c[%n$*%c]%n";
-  sbmode = "(%c+%n$*)";
+  sb = " %Y[%n$*%Y]%n";
+  sbmode = "(%Y+%n$*)";
   sbaway = " (%GzZzZ%n)";
   sbservertag = ":$0 (change with ^X)";
   sbnickmode = "$0";
@@ -283,11 +283,11 @@ abstracts = {
   # activity in statusbar
 
   # ',' separator
-  sb_act_sep = "%c$*";
+  sb_act_sep = "%Y$*";
   # normal text
-  sb_act_text = "%c$*";
+  sb_act_text = "%Y$*";
   # public message
-  sb_act_msg = "%W$*";
+  sb_act_msg = "%R$*";
   # hilight
   sb_act_hilight = "%M$*";
   # hilight with specified color, $0 = color, $1 = text
