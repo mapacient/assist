@@ -1,17 +1,23 @@
-export PATH=$PATH:/var/nentou/19shanghai/bin
-alias c="cd /Volumes/ram"
-alias grep="grep --color=auto"
 
-#hostname
-export HOSTNAME="fooled"
+export PATH="/var/nentou/19shanghai/bin:$PATH"
+export HOSTNAME="write hostname"
+export GO111MODULE=auto
+export GOPROXY=https://goproxy.io
+alias c="cd /Volumes/beikacyou"
+alias j="tmux new -s j"
+alias grep="grep --color=auto"
+alias 2019="zsh /var/nentou/beikacyou/eject"
+alias mongod="mongod --config=/var/nentou/beikacyou/mongo.conf"
 
 autoload -U colors && colors
-#其实配置之前的PS1也是可以的 但是为了尊重说明文档
-PROMPT="%{$fg[red]%}$HOSTNAME%{$reset_color%}%{$fg[yellow]%}<- %{$reset_color%}"
+
+PROMPT="%F{9}$HOSTNAME%{$reset_color%}%F{11}<- %{$reset_color%}"
 #PROMPT="%{$fg[red]%}$HOSTNAME%{$reset_color%}%{$fg[cyan]%}<- %{$reset_color%}"
 #%{$fg[green]%}%1|%~ %{$reset_color%}%#>"        
 #PROMPT="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg[green]%}%1|%~ %{$reset_color%}%#>"        
 #return exit status right
-RPROMPT="%{$fg_bold[yellow]%}<-%?%{$reset_color%}"
-
+RPROMPT="%F{11}<-%?%{$reset_color%}"
+#11 yellow
+#8 grey 9 red
+#57 purple
 cd "/var/nentou"
