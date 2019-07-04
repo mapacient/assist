@@ -1,3 +1,4 @@
+
 # When testing changes, the easiest way to reload the theme is with /RELOAD.
 # This reloads the configuration file too, so if you did any changes remember
 # to /SAVE it first. Remember also that /SAVE overwrites the theme file with
@@ -81,7 +82,7 @@ abstracts = {
   nick = "%Y_$*%_";
 
   # nick host is printed
-  nickhost = "[$*]";
+  nickhost = "[$R$*]";
 
   # server name is printed
   server = "%Y_$*%_";
@@ -138,15 +139,17 @@ abstracts = {
 
   # $0 = nick mode, $1 = nick
   ownmsgnick = "{msgnick $0 $1-}";
-  ownnick = "%_$*%n";
+  ownnick = "%R$*%n";
+  #ownnick = "%_$*%n";
 
   # public message in channel, $0 = nick mode, $1 = nick
   pubmsgnick = "{msgnick $0 $1-}";
   pubnick = "%Y$*%n";
 
   # public message in channel meant for me, $0 = nick mode, $1 = nick
-  pubmsgmenick = "{msgnick $0 $1-}";
-  menick = "%Y$*%n";
+  # public message in channels with nick
+  pubmsgmenick = "%R{msgnick $0 $1-}%R";
+  menick = "%R$*%n";
 
   # public highlighted message in channel
   # $0 = highlight color, $1 = nick mode, $2 = nick
@@ -221,7 +224,8 @@ abstracts = {
 
   # /names list
   names_prefix = "";
-  names_nick = "[%_$0%_$1-] ";
+  names_nick = "[%R$0%R$1-] ";
+  #names_nick = "[%_$0%_$1-] ";
   names_nick_op = "{names_nick $*}";
   names_nick_halfop = "{names_nick $*}";
   names_nick_voice = "{names_nick $*}";

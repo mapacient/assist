@@ -1,3 +1,4 @@
+
 servers = (
   {
     address = "chat.freenode.net";
@@ -18,7 +19,7 @@ servers = (
     address = "chat.freenode.net";
     chatnet = "Freenode";
     port = "6667";
-    password = "writepasswd";
+    password = "1226";
     use_tls = "yes";
     tls_verify = "yes";
     autoconnect = "yes";
@@ -28,7 +29,7 @@ servers = (
 chatnets = {
   Freenode = {
     type = "IRC";
-    autosendcmd = "/msg nickserv identify writename writepasswd;wait -freenode 5000";
+    autosendcmd = "/msg nickserv identify Ishouldwritename Ishouldwritepasswd;wait -freenode 5000";
     max_kicks = "1";
     max_msgs = "4";
     max_whois = "1";
@@ -51,15 +52,16 @@ channels = (
   { name = "#programming"; chatnet = "freenode"; },
   { name = "#sql"; chatnet = "Freenode"; autojoin = "no"; },
   { name = "#linux"; chatnet = "freenode"; autojoin = "no"; },
-  { name = "#docker"; chatnet = "Freenode"; autojoin = "yes"; },
-  { name = "#go-nuts"; chatnet = "Freenode"; autojoin = "yes"; },
+  { name = "#docker"; chatnet = "Freenode"; autojoin = "no"; },
+  { name = "#go-nuts"; chatnet = "Freenode"; autojoin = "no"; },
   { name = "##algorithms"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#ubuntu-cn"; chatnet = "freenode"; },
   { name = "##kaiwa"; chatnet = "freenode"; },
-  { name = "##AGI"; chatnet = "freenode"; }
+  { name = "##AGI"; chatnet = "freenode"; autojoin = "yes"; }
 );
 
 aliases = {
+  AW = "SET AUTOCREATE_WINDOWS TOGGLE";
   ATAG = "WINDOW SERVER";
   ADDALLCHANS = "SCRIPT EXEC foreach my \\$channel (Irssi::channels()) { Irssi::command(\"CHANNEL ADD -auto \\$channel->{name} \\$channel->{server}->{tag} \\$channel->{key}\")\\;}";
   B = "BAN";
@@ -76,7 +78,7 @@ aliases = {
   HL = "HILIGHT";
   HOST = "USERHOST";
   INVITELIST = "MODE $C +I";
-  J = "JOIN";
+  J = "JOIN -window";
   K = "KICK";
   KB = "KICKBAN";
   KN = "KNOCKOUT";
@@ -98,7 +100,6 @@ aliases = {
   W = "WINDOW GOTO";
   WR = "WINDOW RIGHT";
   WC = "WINDOW CLOSE";
-  WJOIN = "JOIN -window";
   WI = "WHOIS";
   WII = "WHOIS $0 $0";
   WL = "WINDOW LIST";
@@ -126,7 +127,7 @@ statusbar = {
     prompt_empty = "{prompt $winname}";
 
     topic = " $topic";
-    topic_empty = "empty";
+    topic_empty = "should I write topic";
 
     lag = "{sb Lag: $0-}";
     act = "{sb Act: $0-}";
@@ -204,9 +205,9 @@ statusbar = {
 };
 settings = {
   core = {
-    real_name = "writename";
-    user_name = "writename";
-    nick = "writename";
+    real_name = "should I write name";
+    user_name = "should I write name";
+    nick = "should I write name";
   };
   "fe-text" = { actlist_sort = "refnum"; scroll = "yes"; };
   "fe-common/core" = {
@@ -216,31 +217,11 @@ settings = {
     reuse_unused_windows = "yes";
     autolog = "yes";
     autolog_path = "/Volumes/beikacyou/irc/$0info";
+    AUTOCREATE_WINDOWS = "yes";
   };
 };
-ignores = ( { level = "JOINS PARTS QUITS"; } );
+ignores = ( { level = "PARTS QUITS"; } );
 hilights = (
-  {
-    text = "\\writename*";
-    color = "%R";
-    nick = "no";
-    word = "no";
-    regexp = "yes";
-  },
-  { 
-    text = "func*";
-    color = "%R";
-    nick = "no";
-    word = "no";
-    regexp = "yes";
-  },
-  {
-    text = "\\bfunc*";
-    color = "%R";
-    nick = "no";
-    word = "no";
-    regexp = "yes";
-  },
   {
     text = "\\bmake\\b";
     color = "%R";
@@ -255,6 +236,7 @@ hilights = (
     nick = "no";
     word = "yes";
     channels = ( "#ai" );
-  }
+  },
+  { text = "should I write name"; color = "%R"; nick = "no"; word = "yes"; }
 );
 logs = { };
