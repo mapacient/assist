@@ -4,6 +4,7 @@ set ignorecase
 set smartcase
 set number
 set relativenumber
+set encoding=utf-8
 set noswapfile
 set nobackup
 set viminfo="none"
